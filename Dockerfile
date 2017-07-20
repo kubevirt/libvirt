@@ -1,14 +1,14 @@
-FROM fedora
+FROM fedora:26
 
-MAINTAINER "Stu Gott" <sgott@redhat.com>
+MAINTAINER "The KubeVirt Project" <kubevirt-dev@googlegroups.com>
 ENV container docker
 
-RUN yum install -y \
+RUN dnf install -y \
   libvirt-daemon-kvm \
   libvirt-daemon-qemu \
   libvirt-client \
   selinux-policy selinux-policy-targeted \
-  augeas
+  augeas && dnf clean all
 
 COPY augconf /augconf
 RUN augtool -f /augconf
