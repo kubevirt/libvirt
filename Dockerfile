@@ -3,9 +3,10 @@ FROM fedora:27
 MAINTAINER "The KubeVirt Project" <kubevirt-dev@googlegroups.com>
 ENV container docker
 
-RUN dnf install -y \
+# nettle update is necessary for dnsmasq which is used by libvirt
+RUN dnf -y update nettle && \
+  dnf install -y \
   libvirt-daemon-kvm \
-  libvirt-daemon-qemu \
   libvirt-client \
   selinux-policy selinux-policy-targeted \
   augeas && dnf clean all
