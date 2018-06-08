@@ -18,24 +18,7 @@ To access libvirtd via TCP you still need to export
 the correct port.
 
 
-# Try with k8s
-
-For convenience there is a daemon set definition which
-can be used with kubernetes.
-
-Note: make sure that libvirtd is not running on the hosts
-of the k8s cluster.
-
-Define the daemon set:
-
-    kubectl create -f libvirtd-ds.yaml
-
-Now test on any host of the cluster:
-
-    virsh -c "qemu+tcp://127.0.0.1/system" capabilities
-
-
-# Try without k8s
+# Try with docker
 
 Note: Make sure to not run libvirtd on the host.
 
