@@ -3,8 +3,8 @@ FROM fedora:28
 MAINTAINER "The KubeVirt Project" <kubevirt-dev@googlegroups.com>
 ENV container docker
 
-RUN curl --output /etc/yum.repos.d/fedora-virt-preview.repo \
-  https://fedorapeople.org/groups/virt/virt-preview/fedora-virt-preview.repo && \
+RUN dnf install -y dnf-plugins-core && \
+  dnf copr enable -y @virtmaint-sig/virt-preview && \
   dnf install -y \
   libvirt-daemon-kvm \
   libvirt-client \
