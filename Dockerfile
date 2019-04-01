@@ -3,7 +3,7 @@ FROM fedora:28
 MAINTAINER "The KubeVirt Project" <kubevirt-dev@googlegroups.com>
 ENV container docker
 
-ENV LIBVIRT_VERSION 5.0.0
+ENV LIBVIRT_VERSION 5.1.0
 
 RUN dnf install -y dnf-plugins-core && \
   dnf copr enable -y @virtmaint-sig/virt-preview && \
