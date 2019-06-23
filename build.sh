@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t kubevirt/libvirt:5.1.0 .
+docker build -t kubevirt/libvirt:5.4.0 .
