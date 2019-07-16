@@ -1,18 +1,19 @@
-FROM fedora:28
+FROM fedora:30
 
 MAINTAINER "The KubeVirt Project" <kubevirt-dev@googlegroups.com>
 ENV container docker
 
-ENV LIBVIRT_VERSION 5.1.0
+ENV LIBVIRT_VERSION 5.0.0
 
 RUN dnf install -y dnf-plugins-core && \
-  dnf copr enable -y @virtmaint-sig/virt-preview && \
+  dnf copr enable -y @virtmaint-sig/for-kubevirt && \
   dnf install -y \
     libvirt-daemon-kvm-${LIBVIRT_VERSION} \
     libvirt-client-${LIBVIRT_VERSION} \
     socat \
     genisoimage \
     selinux-policy selinux-policy-targeted \
+    nftables \
     augeas && \
   dnf clean all
 
