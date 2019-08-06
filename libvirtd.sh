@@ -63,5 +63,10 @@ fi
 
 echo "cgroup_controllers = [ ]" >> /etc/libvirt/qemu.conf
 
+if [ -n "${LIBVIRT_DEBUG_LOGS}" ]; then
+	# see https://wiki.libvirt.org/page/DebugLogs for details
+	echo 'log_filters="3:remote 4:event 3:util.json 3:rpc 1:*"' >> /etc/libvirt/libvirtd.conf
+fi
+
 /usr/sbin/virtlogd &
 /usr/sbin/libvirtd -l
