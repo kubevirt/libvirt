@@ -10,7 +10,6 @@ RUN dnf install -y dnf-plugins-core && \
   dnf install -y \
     libvirt-daemon-kvm-${LIBVIRT_VERSION} \
     libvirt-client-${LIBVIRT_VERSION} \
-    socat \
     genisoimage \
     selinux-policy selinux-policy-targeted \
     nftables \
