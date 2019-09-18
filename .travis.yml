@@ -4,19 +4,14 @@ language: generic
 os:
 - linux
 - linux-ppc64le
-
 services:
-  - docker
-
+- docker
 before_script:
- - ARCH=`uname -m`
-
+- ARCH=`uname -m`
 script:
-  - if [[ "$ARCH" == "ppc64le" ]];
-    then docker build -f Dockerfile.ppc64le -t kubevirt/libvirt .;
-    else docker build . -t kubevirt/libvirt;
-    fi
-  - docker run --rm -it kubevirt/libvirt libvirtd --version
+- if [[ "$ARCH" == "ppc64le" ]]; then docker build -f Dockerfile.ppc64le -t kubevirt/libvirt
+  .; else docker build . -t kubevirt/libvirt; fi
+- docker run --rm -it kubevirt/libvirt libvirtd --version
 deploy:
 - provider: script
   script: bash deploy.sh
@@ -25,5 +20,5 @@ deploy:
     branch: master
 env:
   global:
-    - secure: OsEUfhA4Jz73Rb2U5E65hfMf/3avl4zoos+PZWBHT+qG2GgbUZO4K5qVevdkj4iy1BWXWwQW24xGDQEU24btc0SlqlYfC3K3m2axVmFRd/fYj5RtpoACeFzX6FOCUfwd9YOeihO2IcIBdwZczruZgKZk4ur2ozI7cxz7uJNY6sepvPHf/JdvCGYwaIEb02V87YOTWn8DzfQZXNc5LP/elpuulk8AfjfpRTvjlbXxRQmNHrWpqcNBM7o/qy9iV7fWvCUdIMFm8FyBFrxvZtnRn5ECg4AKAkX4MZmllKtmVF8I7dJOnPwTbTIsKdC5BtJ93X0KpEeElTN37N/e3N1qDmgVqmpVFBtWElFdRqk433GCGJaWJiuq2k12HoXmMelIfB7E1PdGNebggZclb1cSWGdQDj6ynkh+mdivWyCckBb7wtzOQ1bbxjIo6mUOsCAEOssY6/Ugssis6Oh1yEPPIaZJ5FdTTxy2T2xHUZ/ZzQ9k+iPZr6H/Gt2PJSqsHI10liFF7Xmjb6K5BVPbzUxWho8WlKK/glTMG9aucp5vP++bSGkiwjzeyiF4xWoIKdddPab1/CY4HMBgKa5J8eRUkTndIyfwf8MsLz7Ea3YYrdMmbQ123r1N93TJ2+ap6zRup0FTVPVc20hqBPap/9kJUxNuIDVtJM120z5DxYkNtqs=
-    - secure: jHCrETcBied7j+wXQ8YJR5CdNtEy2ZZssJyRD4ORDsSkJwRkh3tD+zJs9WdweCY2NrM4jwSOmJsodyG7a3D5Cn5K+ZQXuW4JbjLFcwftyjHJXvskkxswSzSTuoAA8vIPjDEwiiy24NYCvpNkuF/2Bgrqeg2Bm1hAm0y/GwZQHY8M6dq2myTkL+4lc7ZDHEDXLgZ7wRfd/CXuyY6i852ndz65BtafdvYKqNf/GBzO/5x59jLVA5ue2kdeZ0RyNsgCTsGyIx0nlBx6nwzhb+RgSVwl2SODfei3oiOu3L0uqQOZS61I0x8DiD0wAwAmKU6j5BeeVfQDgY6uaqDeRahv4C6dPbSHg3YO4TfBl78UipaBDhVRW4D6uFCQ/yZAPNFTNhRCHHVNDvaqtX/h5qag92jQdH7IcBUjM/baGgisoZ5A9DyWKei8uKrar3erfjPtMRvLuuaGuluCbmufshBWBtzW6gucwEL7QVnuQRbzL0qTcaDIKLDXaKCToTGjNryNMqGKpH8+qPv3d/pn2yOb61lYJbJfVDZlUgIjvFxe0ZDIlLApJtdiNyL1zKyozL+aK8QVrlvXAHn3uraz9l3+HL8bC7cn7EEig95aAgpi/5GjHmTDE+vLO5NU9An/Zbl0LXSW0gBv1JrNakib3l9t9bCYVWJ7oL2gemxrLm+4MeM=
+  - secure: EOp/iClw0oQUWLcoxAgkAdpQK2jQcK/9s0RhmAP24rlOobvJxb8mkjSyW1FLxzvHj88hTsnV929z5Es6X8B5RubmNQmuCE+sNmbyhFlKlM1k0ivw6emqVUlQhJD/htc80Pmz3cdtMRlD94GC1+hMIdLTPgVziJPZ7RIVOgNYVMOaVKoSLfppRKtUyZVlFpB4iZ/iqY35XtBfHjyUePcC0vtQ7eoIGkLNimor8pX1FW4ZvW2UtSo7p4UgEggKhU97erlxY38Wnh/PaFJgIyZ3XIpKmT4awukzqiPdHhECnwoorzzcdSQYidwqobvPwLbNKLD1W8r8+NnmxEcO3TFDFLIvaN3Qpo9QovkrKNJtHTKQl3YjrAnNkni3uI88GDkbaBCqfJlGfZ7K7umBDuJuXjpVpbZAWVVUpc4/WjaX/iv3kYSbEf14kRAwEIbiaa52EXiJCtIxh2rb2vfSd9Ec/6BvGrkLGTamRUl8XWWpONtUttGw5zMI8PPEImauqYna98cC3jrPuh7h/I5LiupOTgnsiPMIoX1bltuAn88OqJbNEaTRe0ABD3i30qRCdXNMsvaHbz4MhYBg++ldBH3hXTu4UKLn9k8lUG8mh9qHCNrMjRp/Z4NWPgxmHa9wOGF7fb67Kzh53Y3VjH75rft1TpkEOpsE3YFPZ5xgn3I00sE=
+  - secure: W9QWmzrgS5zLH9mHT/EId2VaSP6b4fChaAW7Pq8+MZQelF3B4Y5fcQCy8miQApVUrq6OayGU9KgNn7bbiVV2ptDvsMbSShwM5FGcIiIFBAGQRoki1bQPkaX/drqTdTW2GwiXjpFpMrw2gd18aVFDYj+rcu/OwXs2yqJ8R/JpBq4I/P7soVdR1Abc/nMshqjimcGX++h5m5bEEa8s5GBXMCnf8Y7oGJlUHpjlCFevUiCPF+mc3Nj+T970ugbNuoGlqQbCApHA4gqgroYWwj1jH8ZVmZAd+tdVvHRxuG9sHP5wY7S1mXXseOVDlFGfw+YZqOQv9hyf/SdTPUpmxptIPxM6hY4C/1r3zk2xgLWuIrrn+jK5xL/kTByYFUVx+qEixrE/lW0BRp5T18kRlbYuHINQXgWK2U0GKEkCH4woTqYhA8WulZ80RaL5azrZVix7/6iuSOx8dFLBk4sKRujlyeUUAssmZx0N+QMffIMexSo0lafyUMn6BUiSmVHqAYQlLFOr7NTvsFW/v5wVjxT8EfTN+GLnkvd4eQvHA/FYsqYVcYVSvTEkNh3LL1HSfRX0Lopa/KmmSVoTXpWDBMW3oBgZoi67Vz+IcVw97hIRDyaLOEsLI4dPN2lTz5iMQHgSl5eptjWC5IAbJLiB90QCRuhi8LmCqNe+twqjtFzBlS0=
