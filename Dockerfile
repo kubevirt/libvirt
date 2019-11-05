@@ -22,6 +22,10 @@ RUN augtool -f /augconf
 COPY libvirtd.sh /libvirtd.sh
 RUN chmod a+x /libvirtd.sh
 
-RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/bin/qemu-system-x86_64
+RUN for arch in x86_64 ppc64; do \
+      qemu="/usr/bin/qemu-system-${arch}"; \
+      test -e "${qemu}" || continue; \
+      setcap CAP_NET_BIND_SERVICE=+eip "${qemu}"; \
+    done
 
 CMD ["/libvirtd.sh"]
