@@ -6,11 +6,8 @@ os:
 - linux-ppc64le
 services:
 - docker
-before_script:
-- ARCH=`uname -m`
 script:
-- if [[ "$ARCH" == "ppc64le" ]]; then docker build -f Dockerfile.ppc64le -t kubevirt/libvirt
-  .; else docker build . -t kubevirt/libvirt; fi
+- docker build . -t kubevirt/libvirt
 - docker run --rm -it kubevirt/libvirt libvirtd --version
 deploy:
 - provider: script
