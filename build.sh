@@ -2,6 +2,8 @@
 
 set -xe
 
+source config
+
 # A single QEMU binary might emulate multiple architectures, so we
 # can't just use the host architecture name but we have to perform
 # some processing first
