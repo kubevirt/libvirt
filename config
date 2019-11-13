@@ -3,3 +3,4 @@
 IMAGE_NAME="kubevirt/libvirt"
 
 LIBVIRT_VERSION="5.0.0-2.fc30"
+QEMU_VERSION="2:3.1.0-9.fc30"
