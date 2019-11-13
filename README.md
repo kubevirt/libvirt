@@ -19,7 +19,24 @@ the correct port.
 
 ## Versions to use
 
-* `kubevirt/libvirt:5.0.0`: `sha256:71d10b2ae0af286e4ff0674a7ecfb86ac2455e529fafc97810101f5700b4a416`
+Look for something like
+
+    container_pull(
+        name = "libvirt",
+        digest = "sha256:1234567890abcdef..."
+        registry = "index.docker.io",
+        repository = "kubevirt/libvirt",
+        #tag = "...",
+    )
+
+in the
+[https://github.com/kubevirt/kubevirt/blob/master/WORKSPACE](WORKSPACE)
+file for the KubeVirt project to figure out which version is currently
+in use, and then run the same version using
+
+    docker run \
+      ... \
+      kubevirt/libvirt@sha256:1234567890abcdef...
 
 ## Try with docker
 
