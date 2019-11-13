@@ -7,8 +7,7 @@ os:
 services:
 - docker
 script:
-- docker build . -t kubevirt/libvirt
-- docker run --rm -it kubevirt/libvirt libvirtd --version
+- bash build.sh
 deploy:
 - provider: script
   script: bash deploy.sh

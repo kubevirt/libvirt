@@ -1,3 +1,6 @@
 #!/bin/bash
 
-docker build -t kubevirt/libvirt:5.0.0 .
+set -x
+
+docker build -t kubevirt/libvirt .
+docker run --rm -it kubevirt/libvirt libvirtd --version
