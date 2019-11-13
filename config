@@ -1,3 +1,5 @@
 # This file is sourced during build
 
 IMAGE_NAME="kubevirt/libvirt"
+
+LIBVIRT_VERSION="5.0.0-2.fc30"

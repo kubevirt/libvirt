@@ -14,6 +14,7 @@ case "${HOST_ARCH}" in
 esac
 
 docker build \
+    --build-arg LIBVIRT_VERSION="${LIBVIRT_VERSION}" \
     --build-arg QEMU_ARCH="${QEMU_ARCH}" \
     -t "${IMAGE_NAME}" .
 
