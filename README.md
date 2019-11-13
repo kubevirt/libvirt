@@ -36,7 +36,7 @@ Start the container
       --user=root \
       --privileged \
       -v /:/host:Z \
-      -it kubevirt/libvirtd:latest
+      -it kubevirt/libvirt:latest
 
 Now, to verify, run, on the host:
 
@@ -74,6 +74,6 @@ Considerations that need to be taken into account:
       --privileged \
       -v /:/host:Z \
       -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
-      -it kubevirt/libvirtd:latest
+      -it kubevirt/libvirt:latest
 
   The example path used here could vary across different systems.
