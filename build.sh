@@ -15,6 +15,6 @@ esac
 
 docker build \
     --build-arg QEMU_ARCH="${QEMU_ARCH}" \
-    -t kubevirt/libvirt .
+    -t "${IMAGE_NAME}" .
 
-docker run --rm -it kubevirt/libvirt libvirtd --version
+docker run --rm -it "${IMAGE_NAME}" libvirtd --version
