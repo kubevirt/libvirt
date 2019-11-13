@@ -14,6 +14,7 @@ case "${HOST_ARCH}" in
 esac
 
 docker build \
+    --build-arg FEDORA_VERSION="${FEDORA_VERSION}" \
     --build-arg LIBVIRT_VERSION="${LIBVIRT_VERSION}" \
     --build-arg QEMU_VERSION="${QEMU_VERSION}" \
     --build-arg QEMU_ARCH="${QEMU_ARCH}" \

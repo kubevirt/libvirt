@@ -1,4 +1,5 @@
-FROM fedora:30
+ARG FEDORA_VERSION
+FROM fedora:${FEDORA_VERSION}
 
 MAINTAINER "The KubeVirt Project" <kubevirt-dev@googlegroups.com>
 ENV container docker
