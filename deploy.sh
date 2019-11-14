@@ -17,8 +17,8 @@ cp docker-config.json ~/.docker/config.json
 
 docker login -u="${DOCKER_USER}" -p="${DOCKER_PASS}"
 
-docker tag "${IMAGE_NAME}:latest" "${IMAGE_NAME}:${TAG}.${HOST_ARCH}"
-docker push "${IMAGE_NAME}:${TAG}.${HOST_ARCH}"
+docker tag "${IMAGE_NAME}:latest" "${IMAGE_NAME}:tmp.${TAG}.${HOST_ARCH}"
+docker push "${IMAGE_NAME}:tmp.${TAG}.${HOST_ARCH}"
 
 # We need one of the workers to stick around so that it can create
 # and push the manifest, as well as clean up. It doesn't really
@@ -31,22 +31,22 @@ fi
 
 # Wait for the other images to be available before proceeding
 while true; do
-    docker pull "${IMAGE_NAME}:${TAG}.x86_64" && break
+    docker pull "${IMAGE_NAME}:tmp.${TAG}.x86_64" && break
     sleep 5
 done
 
 docker manifest create \
     "${IMAGE_NAME}:${TAG}" \
-    "${IMAGE_NAME}:${TAG}.x86_64" \
-    "${IMAGE_NAME}:${TAG}.ppc64le"
+    "${IMAGE_NAME}:tmp.${TAG}.x86_64" \
+    "${IMAGE_NAME}:tmp.${TAG}.ppc64le"
 docker manifest push "${IMAGE_NAME}:${TAG}"
 
 docker manifest create \
     "${IMAGE_NAME}:latest" \
-    "${IMAGE_NAME}:${TAG}.x86_64" \
-    "${IMAGE_NAME}:${TAG}.ppc64le"
+    "${IMAGE_NAME}:tmp.${TAG}.x86_64" \
+    "${IMAGE_NAME}:tmp.${TAG}.ppc64le"
 docker manifest push "${IMAGE_NAME}:latest"
 
 # Remove architecture-specific tags: we no longer need them
-bash rmtag.sh "${DOCKER_USER}" "${DOCKER_PASS}" "${TAG}.x86_64"
-bash rmtag.sh "${DOCKER_USER}" "${DOCKER_PASS}" "${TAG}.ppc64le"
+bash rmtag.sh "${DOCKER_USER}" "${DOCKER_PASS}" "tmp.${TAG}.x86_64"
+bash rmtag.sh "${DOCKER_USER}" "${DOCKER_PASS}" "tmp.${TAG}.ppc64le"
