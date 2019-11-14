@@ -46,3 +46,7 @@ docker manifest create \
     "${IMAGE_NAME}:${TAG}.x86_64" \
     "${IMAGE_NAME}:${TAG}.ppc64le"
 docker manifest push "${IMAGE_NAME}:latest"
+
+# Remove architecture-specific tags: we no longer need them
+bash rmtag.sh "${DOCKER_USER}" "${DOCKER_PASS}" "${TAG}.x86_64"
+bash rmtag.sh "${DOCKER_USER}" "${DOCKER_PASS}" "${TAG}.ppc64le"
