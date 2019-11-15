@@ -20,5 +20,5 @@ docker build \
     --build-arg QEMU_ARCH="${QEMU_ARCH}" \
     -t "${IMAGE_NAME}" .
 
-docker run --rm -it "${IMAGE_NAME}" libvirtd --version
-docker run --rm -it "${IMAGE_NAME}" "qemu-system-${QEMU_ARCH}" --version
+docker run --rm "${IMAGE_NAME}" libvirtd --version
+docker run --rm "${IMAGE_NAME}" "qemu-system-${QEMU_ARCH}" --version
