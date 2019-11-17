@@ -6,16 +6,16 @@ LABEL maintainer="The KubeVirt Project <kubevirt-dev@googlegroups.com>"
 ARG LIBVIRT_VERSION
 ARG QEMU_VERSION
 RUN dnf install -y dnf-plugins-core && \
-  dnf copr enable -y @virtmaint-sig/for-kubevirt && \
-  dnf install -y \
-    libvirt-daemon-kvm-${LIBVIRT_VERSION} \
-    libvirt-client-${LIBVIRT_VERSION} \
-    qemu-kvm-${QEMU_VERSION} \
-    genisoimage \
-    selinux-policy selinux-policy-targeted \
-    nftables \
-    augeas && \
-  dnf clean all
+    dnf copr enable -y @virtmaint-sig/for-kubevirt && \
+    dnf install -y \
+      libvirt-daemon-kvm-${LIBVIRT_VERSION} \
+      libvirt-client-${LIBVIRT_VERSION} \
+      qemu-kvm-${QEMU_VERSION} \
+      genisoimage \
+      selinux-policy selinux-policy-targeted \
+      nftables \
+      augeas && \
+    dnf clean all
 
 COPY augconf /augconf
 RUN augtool -f /augconf
