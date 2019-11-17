@@ -8,7 +8,7 @@ ARG QEMU_VERSION
 RUN dnf install -y dnf-plugins-core && \
     dnf copr enable -y @virtmaint-sig/for-kubevirt && \
     dnf install -y \
-      libvirt-daemon-kvm-${LIBVIRT_VERSION} \
+      libvirt-daemon-driver-qemu-${LIBVIRT_VERSION} \
       libvirt-client-${LIBVIRT_VERSION} \
       qemu-kvm-${QEMU_VERSION} \
       genisoimage \
