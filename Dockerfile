@@ -2,7 +2,6 @@ ARG FEDORA_VERSION
 FROM fedora:${FEDORA_VERSION}
 
 LABEL maintainer="The KubeVirt Project <kubevirt-dev@googlegroups.com>"
-ENV container docker
 
 ARG LIBVIRT_VERSION
 ARG QEMU_VERSION
