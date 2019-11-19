@@ -1,0 +1,7 @@
+# This file is sourced during build
+
+IMAGE_NAME="kubevirt/libvirt"
+
+FEDORA_VERSION="30"
+LIBVIRT_VERSION="5.0.0-2.fc${FEDORA_VERSION}"
+QEMU_VERSION="2:3.1.0-9.fc${FEDORA_VERSION}"

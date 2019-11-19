@@ -19,7 +19,24 @@ the correct port.
 
 ## Versions to use
 
-* `kubevirt/libvirt:5.0.0`: `sha256:71d10b2ae0af286e4ff0674a7ecfb86ac2455e529fafc97810101f5700b4a416`
+Look for something like
+
+    container_pull(
+        name = "libvirt",
+        digest = "sha256:1234567890abcdef..."
+        registry = "index.docker.io",
+        repository = "kubevirt/libvirt",
+        #tag = "...",
+    )
+
+in the
+[https://github.com/kubevirt/kubevirt/blob/master/WORKSPACE](WORKSPACE)
+file for the KubeVirt project to figure out which version is currently
+in use, and then run the same version using
+
+    docker run \
+      ... \
+      kubevirt/libvirt@sha256:1234567890abcdef...
 
 ## Try with docker
 
@@ -36,7 +53,7 @@ Start the container
       --user=root \
       --privileged \
       -v /:/host:Z \
-      -it kubevirt/libvirtd:latest
+      -it kubevirt/libvirt:latest
 
 Now, to verify, run, on the host:
 
@@ -74,6 +91,6 @@ Considerations that need to be taken into account:
       --privileged \
       -v /:/host:Z \
       -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
-      -it kubevirt/libvirtd:latest
+      -it kubevirt/libvirt:latest
 
   The example path used here could vary across different systems.
