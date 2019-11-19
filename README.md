@@ -30,7 +30,7 @@ Look for something like
     )
 
 in the
-[https://github.com/kubevirt/kubevirt/blob/master/WORKSPACE](WORKSPACE)
+[WORKSPACE](https://github.com/kubevirt/kubevirt/blob/master/WORKSPACE)
 file for the KubeVirt project to figure out which version is currently
 in use, and then run the same version using
 
