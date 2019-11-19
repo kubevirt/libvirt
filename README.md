@@ -1,4 +1,4 @@
-# libvirtd
+# Containerized libvirtd and QEMU
 
 This is a simple container wrapping libvirtd.
 
