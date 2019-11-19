@@ -63,7 +63,7 @@ Now, to verify, run, on the host:
 
 These environment variables can be passed into the container
 
-* LIBVIRTD_DEFAULT_NETWORK_DEVICE: Set it to an existing device
+* `LIBVIRTD_DEFAULT_NETWORK_DEVICE`: Set it to an existing device
   to let the default network point to it.
 
 ## Notes
