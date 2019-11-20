@@ -1,4 +1,4 @@
-# libvirtd
+# Containerized libvirtd and QEMU
 
 This is a simple container wrapping libvirtd.
 
@@ -30,7 +30,7 @@ Look for something like
     )
 
 in the
-[https://github.com/kubevirt/kubevirt/blob/master/WORKSPACE](WORKSPACE)
+[WORKSPACE](https://github.com/kubevirt/kubevirt/blob/master/WORKSPACE)
 file for the KubeVirt project to figure out which version is currently
 in use, and then run the same version using
 
@@ -63,23 +63,22 @@ Now, to verify, run, on the host:
 
 These environment variables can be passed into the container
 
-* LIBVIRTD_DEFAULT_NETWORK_DEVICE: Set it to an existing device
+* `LIBVIRTD_DEFAULT_NETWORK_DEVICE`: Set it to an existing device
   to let the default network point to it.
 
 ## Notes
 
-Considerations that need to be taken into account:
+The D-Bus socket is not exposed inside the container
+so firewalld cannot be notified of changes (also
+not every host system uses firewalld) so the following
+ports might need to be allowed in if iptables is not
+accepting input by default:
 
-* The D-Bus socket is not exposed inside the container
-  so firewalld cannot be notified of changes (also
-  not every host system uses firewalld) so the following
-  ports might need to be allowed in if iptables is not
-  accepting input by default:
   * TCP 16509
   * TCP 5900->590X (depending on Spice/VNC settings of guest)
 
-  To run this container with the dbus socket mounted, a host
-  directory could be mounted as a data volume. e.g.:
+To run this container with the D-Bus socket mounted, a host
+directory could be mounted as a data volume. e.g.:
 
     docker run \
       --name libvirtd \
@@ -93,4 +92,4 @@ Considerations that need to be taken into account:
       -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
       -it kubevirt/libvirt:latest
 
-  The example path used here could vary across different systems.
+The example path used here could vary across different systems.
