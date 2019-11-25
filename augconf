@@ -14,6 +14,7 @@ set /files/etc/libvirt/qemu.conf/vnc_sasl 0
 set /files/etc/libvirt/qemu.conf/user qemu
 set /files/etc/libvirt/qemu.conf/group qemu
 set /files/etc/libvirt/qemu.conf/dynamic_ownership 1
+set /files/etc/libvirt/qemu.conf/remember_owner 0
 
 # Workaround libvirt bug in /dev/ handling
 set /files/etc/libvirt/qemu.conf/namespaces
