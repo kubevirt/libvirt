@@ -2,7 +2,6 @@ dist: bionic
 language: generic
 os:
 - linux
-- linux-ppc64le
 services:
 - docker
 script:
