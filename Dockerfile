@@ -6,7 +6,7 @@ LABEL maintainer="The KubeVirt Project <kubevirt-dev@googlegroups.com>"
 ARG LIBVIRT_VERSION
 ARG QEMU_VERSION
 RUN dnf install -y dnf-plugins-core && \
-    dnf copr enable -y @virtmaint-sig/for-kubevirt && \
+    dnf copr enable -y @virtmaint-sig/for-kubevirt-av-8.1 && \
     dnf install -y \
       libvirt-daemon-driver-qemu-${LIBVIRT_VERSION} \
       libvirt-client-${LIBVIRT_VERSION} \
@@ -17,6 +17,7 @@ RUN dnf install -y dnf-plugins-core && \
       nftables \
       iptables \
       augeas && \
+    dnf update -y libgcrypt && \
     dnf clean all
 
 COPY augconf /augconf
@@ -26,6 +27,6 @@ COPY libvirtd.sh /libvirtd.sh
 RUN chmod a+x /libvirtd.sh
 
 ARG QEMU_ARCH
-RUN setcap CAP_NET_BIND_SERVICE=+eip "/usr/bin/qemu-system-${QEMU_ARCH}"
+RUN setcap CAP_NET_BIND_SERVICE=+eip "/usr/libexec/qemu-kvm"
 
 CMD ["/libvirtd.sh"]
