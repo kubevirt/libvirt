@@ -26,7 +26,6 @@ RUN augtool -f /augconf
 COPY libvirtd.sh /libvirtd.sh
 RUN chmod a+x /libvirtd.sh
 
-ARG QEMU_ARCH
 RUN setcap CAP_NET_BIND_SERVICE=+eip "/usr/libexec/qemu-kvm"
 
 CMD ["/libvirtd.sh"]
