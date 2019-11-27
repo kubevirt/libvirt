@@ -9,4 +9,4 @@ QEMU_VERSION="2:3.1.0-9.fc${FEDORA_VERSION}"
 
 # Keep this list in sync with that in .travis.yml
 MAIN_ARCH="ppc64le"
-OTHER_ARCHES="x86_64"
+OTHER_ARCHES="x86_64 aarch64"
