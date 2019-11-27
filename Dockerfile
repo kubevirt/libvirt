@@ -3,10 +3,11 @@ FROM fedora:${FEDORA_VERSION}
 
 LABEL maintainer="The KubeVirt Project <kubevirt-dev@googlegroups.com>"
 
+ARG COPR_VERSION
 ARG LIBVIRT_VERSION
 ARG QEMU_VERSION
 RUN dnf install -y dnf-plugins-core && \
-    dnf copr enable -y @virtmaint-sig/for-kubevirt-av-8.1 && \
+    dnf copr enable -y @virtmaint-sig/for-kubevirt-${COPR_VERSION} && \
     dnf install -y \
       libvirt-daemon-driver-qemu-${LIBVIRT_VERSION} \
       libvirt-client-${LIBVIRT_VERSION} \
