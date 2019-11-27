@@ -1,5 +1,6 @@
 dist: bionic
 language: generic
+# Keep this list in sync with that in config
 os:
 - linux
 - linux-ppc64le
