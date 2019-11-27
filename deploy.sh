@@ -8,7 +8,7 @@ GIT_UNIX_TIMESTAMP=$(git show --format='%ct' | head -1)
 GIT_TIMESTAMP=$(date --date="@${GIT_UNIX_TIMESTAMP}" '+%Y%m%d')
 GIT_COMMIT=$(git describe --always)
 HOST_ARCH=$(uname -m)
-TAG="${GIT_TIMESTAMP}.${GIT_COMMIT}"
+TAG="${COPR_VERSION}-${GIT_TIMESTAMP}-${GIT_COMMIT}"
 
 # Manifests are still not enabled by default, so we need to turn on
 # experimental features in order to use them
