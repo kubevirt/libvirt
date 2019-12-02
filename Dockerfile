@@ -10,11 +10,14 @@ RUN dnf install -y dnf-plugins-core && \
     dnf install -y \
       libvirt-daemon-driver-qemu-${LIBVIRT_VERSION} \
       libvirt-client-${LIBVIRT_VERSION} \
+      libvirt-daemon-driver-storage-core-${LIBVIRT_VERSION} \
       qemu-kvm-${QEMU_VERSION} \
       genisoimage \
       selinux-policy selinux-policy-targeted \
       nftables \
+      iptables \
       augeas && \
+    dnf update -y libgcrypt && \
     dnf clean all
 
 COPY augconf /augconf
@@ -24,6 +27,6 @@ COPY libvirtd.sh /libvirtd.sh
 RUN chmod a+x /libvirtd.sh
 
 ARG QEMU_ARCH
-RUN setcap CAP_NET_BIND_SERVICE=+eip "/usr/bin/qemu-system-${QEMU_ARCH}"
+RUN setcap CAP_NET_BIND_SERVICE=+eip "/usr/libexec/qemu-kvm"
 
 CMD ["/libvirtd.sh"]
