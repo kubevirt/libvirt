@@ -1,7 +1,12 @@
 dist: bionic
 language: generic
-os:
-- linux
+# Keep this list in sync with that in config
+matrix:
+  include:
+  - os: linux
+  - os: linux-ppc64le
+  - os: linux
+    arch: arm64
 services:
 - docker
 script:
