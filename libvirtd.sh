@@ -16,6 +16,9 @@ mkdir /dev.container && {
   keep pts
   mount --rbind /dev/pts/ptmx /dev/ptmx
   # Use the container /dev/kvm if available
+  # Replace inherited permissions from host with ours, as we have a different passwd file
+  # we may use different uids, e.g. kvm on the host is not kvm within the container.
+  [[ -e /dev.container/kvm ]] && chown root:kvm /dev.container/kvm && chmod 660 /dev.container/kvm
   [[ -e /dev.container/kvm ]] && keep kvm
 }
 
