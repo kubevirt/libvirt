@@ -52,12 +52,21 @@ Start the container
       --ipc=host \
       --user=root \
       --privileged \
-      -v /:/host:Z \
-      -it kubevirt/libvirt:latest
+      --volume=/:/host:Z \
+      --volume=/dev:/host-dev \
+      --volume=/sys:/host-sys \
+      --volume=/var/run/libvirt:/var/run/libvirt \
+      --tty=true \
+      --detach=true \
+      kubevirt/libvirt@sha256:1234567890abcdef...
 
 Now, to verify, run, on the host:
 
     virsh capabilities
+
+Note: If you do not have `virsh` installed on the host,
+you can also use it from another container,
+just make sure they share the `/var/run/libvirt` volume.
 
 ## Environment Variables
 
@@ -88,8 +97,13 @@ directory could be mounted as a data volume. e.g.:
       --ipc=host \
       --user=root \
       --privileged \
-      -v /:/host:Z \
-      -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
-      -it kubevirt/libvirt:latest
+      --volume=/:/host:Z \
+      --volume=/dev:/host-dev \
+      --volume=/sys:/host-sys \
+      --volume=/var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \
+      --volume=/var/run/libvirt:/var/run/libvirt \
+      --tty=true \
+      --detached=true \
+      kubevirt/libvirt@sha256:1234567890abcdef...
 
 The example path used here could vary across different systems.
