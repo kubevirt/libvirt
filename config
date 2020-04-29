@@ -8,5 +8,5 @@ LIBVIRT_VERSION="6.0.0-16.fc${FEDORA_VERSION}"
 QEMU_VERSION="4.2.0-15.fc${FEDORA_VERSION}"
 
 # Keep this list in sync with that in .travis.yml
-MAIN_ARCH="ppc64le"
-OTHER_ARCHES="x86_64 aarch64"
+MAIN_ARCH="x86_64"
+OTHER_ARCHES="aarch64"

@@ -4,7 +4,6 @@ language: generic
 matrix:
   include:
   - os: linux
-  - os: linux-ppc64le
   - os: linux
     arch: arm64
 services:
