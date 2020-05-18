@@ -13,3 +13,7 @@ sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 # Enable experimental features for the Docker client
 mkdir -p ~/.docker
 cp docker-client.json ~/.docker/config.json
+
+# Enable experimental features for the Docker daemon
+sudo cp docker-daemon.json /etc/docker/daemon.json
+sudo systemctl restart docker
