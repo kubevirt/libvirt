@@ -10,11 +10,6 @@ GIT_COMMIT=$(git describe --always)
 HOST_ARCH=$(uname -m)
 TAG="${COPR_VERSION}-${GIT_TIMESTAMP}-${GIT_COMMIT}"
 
-# Manifests are still not enabled by default, so we need to turn on
-# experimental features in order to use them
-mkdir -p ~/.docker
-cp docker-config.json ~/.docker/config.json
-
 docker login -u="${DOCKER_USER}" -p="${DOCKER_PASS}"
 
 docker tag "${IMAGE_NAME}:latest" "${IMAGE_NAME}:tmp.${TAG}.${HOST_ARCH}"
