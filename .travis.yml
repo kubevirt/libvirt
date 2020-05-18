@@ -8,6 +8,8 @@ matrix:
     arch: arm64
 services:
 - docker
+before_script:
+- bash prepare.sh
 script:
 - bash build.sh
 deploy:
