@@ -17,3 +17,8 @@ cp docker-client.json ~/.docker/config.json
 # Enable experimental features for the Docker daemon
 sudo cp docker-daemon.json /etc/docker/daemon.json
 sudo systemctl restart docker
+
+# Install the buildx Docker plugin
+DOCKER_BUILDKIT=1 docker build --platform=local -o . git://github.com/docker/buildx
+mkdir -p ~/.docker/cli-plugins
+mv buildx ~/.docker/cli-plugins/docker-buildx
