@@ -7,6 +7,4 @@ FEDORA_VERSION="31"
 LIBVIRT_VERSION="6.0.0-16.fc${FEDORA_VERSION}"
 QEMU_VERSION="4.2.0-15.fc${FEDORA_VERSION}"
 
-# Keep this list in sync with that in .travis.yml
-MAIN_ARCH="x86_64"
-OTHER_ARCHES="aarch64"
+TARGET_ARCHITECTURES="amd64 arm64"
