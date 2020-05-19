@@ -2,7 +2,7 @@
 
 set -xe
 
-source config
+source hack/config
 
 GIT_UNIX_TIMESTAMP=$(git show --format='%ct' | head -1)
 GIT_TIMESTAMP=$(date --date="@${GIT_UNIX_TIMESTAMP}" '+%Y%m%d')

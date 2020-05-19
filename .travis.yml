@@ -4,12 +4,12 @@ language: generic
 services:
 - docker
 before_script:
-- bash prepare.sh
+- bash hack/prepare.sh
 script:
-- bash build.sh
+- bash hack/build.sh
 deploy:
 - provider: script
-  script: bash deploy.sh
+  script: bash hack/deploy.sh
   skip_cleanup: true
   on:
     all_branches: true

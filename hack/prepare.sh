@@ -2,7 +2,7 @@
 
 set -xe
 
-source config
+source hack/config
 
 # Install the latest version of Docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -12,10 +12,10 @@ sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 # Enable experimental features for the Docker client
 mkdir -p ~/.docker
-cp docker-client.json ~/.docker/config.json
+cp hack/docker-client.json ~/.docker/config.json
 
 # Enable experimental features for the Docker daemon
-sudo cp docker-daemon.json /etc/docker/daemon.json
+sudo cp hack/docker-daemon.json /etc/docker/daemon.json
 sudo systemctl restart docker
 
 # Install the buildx Docker plugin

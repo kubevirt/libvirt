@@ -2,7 +2,7 @@
 
 set -xe
 
-source config
+source hack/config
 
 # We need to build for one architecture at a time because buildx
 # can't currently export multi-architecture containers to the Docker
