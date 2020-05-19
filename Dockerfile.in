@@ -1,18 +1,14 @@
-ARG FEDORA_VERSION
-FROM fedora:${FEDORA_VERSION}
+FROM fedora:@FEDORA_VERSION@
 
 LABEL maintainer="The KubeVirt Project <kubevirt-dev@googlegroups.com>"
 
-ARG COPR_VERSION
-ARG LIBVIRT_VERSION
-ARG QEMU_VERSION
 RUN dnf install -y dnf-plugins-core && \
-    dnf copr enable -y @virtmaint-sig/for-kubevirt-${COPR_VERSION} && \
+    dnf copr enable -y @virtmaint-sig/for-kubevirt-@COPR_VERSION@ && \
     dnf install -y \
-      libvirt-daemon-driver-qemu-${LIBVIRT_VERSION} \
-      libvirt-client-${LIBVIRT_VERSION} \
-      libvirt-daemon-driver-storage-core-${LIBVIRT_VERSION} \
-      qemu-kvm-${QEMU_VERSION} \
+      libvirt-daemon-driver-qemu-@LIBVIRT_VERSION@ \
+      libvirt-client-@LIBVIRT_VERSION@ \
+      libvirt-daemon-driver-storage-core-@LIBVIRT_VERSION@ \
+      qemu-kvm-@QEMU_VERSION@ \
       genisoimage \
       selinux-policy selinux-policy-targeted \
       nftables \
