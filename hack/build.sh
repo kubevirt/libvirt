@@ -36,7 +36,7 @@ for ARCH in ${TARGET_ARCHITECTURES}; do
         --rm \
         --platform="${DOCKER_PLATFORM}" \
         "${IMAGE_NAME}:${TAG}" \
-        /usr/libexec/qemu-kvm --version
+        sh -c 'for qemu in /usr/bin/qemu-system-*; do $qemu --version; done'
 
     docker rmi "${IMAGE_NAME}:${TAG}"
 done

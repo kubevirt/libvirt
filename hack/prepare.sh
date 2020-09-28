@@ -35,7 +35,6 @@ docker buildx inspect --bootstrap
 # that use that feature: preprocessing the file ourselves works
 # around that limitation
 sed -e "s/@FEDORA_VERSION@/${FEDORA_VERSION}/g" \
-    -e "s/@COPR_VERSION@/${COPR_VERSION}/g" \
     -e "s/@LIBVIRT_VERSION@/${LIBVIRT_VERSION}/g" \
     -e "s/@QEMU_VERSION@/${QEMU_VERSION}/g" \
     <Dockerfile.in >Dockerfile
