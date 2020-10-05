@@ -4,6 +4,17 @@ set -xe
 
 source hack/config
 
+# Prepare Dockerfile
+#
+# We need to do this instead of using the ARG feature because buildx
+# doesn't currently behave correctly when cross-building containers
+# that use that feature: preprocessing the file ourselves works
+# around that limitation
+sed -e "s/@FEDORA_VERSION@/${FEDORA_VERSION}/g" \
+    -e "s/@LIBVIRT_VERSION@/${LIBVIRT_VERSION}/g" \
+    -e "s/@QEMU_VERSION@/${QEMU_VERSION}/g" \
+    <Dockerfile.in >Dockerfile
+
 # We need to build for one architecture at a time because buildx
 # can't currently export multi-architecture containers to the Docker
 # daemon, so we wouldn't be able to test the results otherwise. The

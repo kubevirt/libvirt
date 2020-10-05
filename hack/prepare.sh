@@ -27,14 +27,3 @@ mv buildx ~/.docker/cli-plugins/docker-buildx
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 docker buildx create --use
 docker buildx inspect --bootstrap
-
-# Prepare Dockerfile
-#
-# We need to do this instead of using the ARG feature because buildx
-# doesn't currently behave correctly when cross-building containers
-# that use that feature: preprocessing the file ourselves works
-# around that limitation
-sed -e "s/@FEDORA_VERSION@/${FEDORA_VERSION}/g" \
-    -e "s/@LIBVIRT_VERSION@/${LIBVIRT_VERSION}/g" \
-    -e "s/@QEMU_VERSION@/${QEMU_VERSION}/g" \
-    <Dockerfile.in >Dockerfile
