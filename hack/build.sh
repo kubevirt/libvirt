@@ -3,6 +3,7 @@
 set -xe
 
 source hack/config
+source hack/common.sh
 
 # Prepare Dockerfile
 #
@@ -51,3 +52,10 @@ for ARCH in ${TARGET_ARCHITECTURES}; do
 
     docker rmi "${IMAGE_NAME}:${TAG}"
 done
+
+# This builds a multi-architecture image from image build cache.
+docker buildx build \
+    --progress=plain \
+    --platform="${ALL_DOCKER_PLATFORMS}" \
+    --tag "${IMAGE_NAME}:${TAG}" \
+    .
