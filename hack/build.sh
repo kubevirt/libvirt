@@ -2,7 +2,7 @@
 
 set -xe
 
-source hack/config
+source hack/common.sh
 
 # Prepare Dockerfile
 #

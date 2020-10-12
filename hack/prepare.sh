@@ -2,7 +2,7 @@
 
 set -xe
 
-source hack/config
+source hack/common.sh
 
 # Install the latest version of Docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
