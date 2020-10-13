@@ -21,11 +21,6 @@ RUN dnf install -y dnf-plugins-core && \
 COPY augconf /augconf
 RUN augtool -f /augconf
 
-COPY libvirtd.sh /libvirtd.sh
-RUN chmod a+x /libvirtd.sh
-
 RUN for qemu in /usr/bin/qemu-system-*; do \
         setcap CAP_NET_BIND_SERVICE=+eip $qemu; \
     done
-
-CMD ["/libvirtd.sh"]
