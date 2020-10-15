@@ -1,0 +1,10 @@
+# This file is sourced during build
+
+IMAGE_NAME="kubevirt/libvirt"
+
+COPR_VERSION="av-8.2"
+FEDORA_VERSION="31"
+LIBVIRT_VERSION="6.0.0-16.fc${FEDORA_VERSION}"
+QEMU_VERSION="4.2.0-27.fc${FEDORA_VERSION}"
+
+TARGET_ARCHITECTURES="amd64 arm64"
