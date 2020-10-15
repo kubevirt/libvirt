@@ -16,6 +16,7 @@ for ARCH in ${TARGET_ARCHITECTURES}; do
     DOCKER_PLATFORM="linux/${ARCH}"
 
     docker buildx build \
+        --progress=plain \
         --load \
         --platform="${DOCKER_PLATFORM}" \
         --tag "${IMAGE_NAME}:${TAG}" \

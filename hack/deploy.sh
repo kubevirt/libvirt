@@ -16,6 +16,7 @@ docker login -u="${DOCKER_USER}" -p="${DOCKER_PASS}"
 # single step. The cached layers from the build step will be reused,
 # so ultimately this only assembles and pushes the manifest
 docker buildx build \
+    --progress=plain \
     --push \
     --platform="${DOCKER_PLATFORM}" \
     --tag "${IMAGE_NAME}:${TAG}" \
