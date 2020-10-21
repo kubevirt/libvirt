@@ -1,0 +1,9 @@
+# This file is sourced during build
+
+IMAGE_NAME="kubevirt/libvirt"
+
+FEDORA_VERSION="32"
+LIBVIRT_VERSION="6.6.0-2"
+QEMU_VERSION="5.1.0-5"
+
+TARGET_ARCHITECTURES="amd64 arm64"
