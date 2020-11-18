@@ -1,4 +1,10 @@
-# This file is sourced during build
+# This is the default configuration: each of these variables can be
+# overriden on the command line by using something like
+#
+#   $ IMAGE_NAME=my-libvirt ./hack/build.sh
+#
+# Note that in this case the variable must be specified *without*
+# the CONF_ prefix.
 
 CONF_IMAGE_NAME="kubevirt/libvirt"
 
