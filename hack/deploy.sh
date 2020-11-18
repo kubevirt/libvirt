@@ -12,6 +12,6 @@ docker login -u="${DOCKER_USER}" -p="${DOCKER_PASS}"
 docker buildx build \
     --progress=plain \
     --push \
-    --platform="${DOCKER_PLATFORM}" \
-    --tag "${IMAGE_NAME}:${TAG}" \
+    --platform="${DOCKER_PLATFORMS}" \
+    --tag "${IMAGE_NAME}:${IMAGE_TAG}" \
     .
