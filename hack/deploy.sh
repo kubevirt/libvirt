@@ -12,4 +12,4 @@ platform="${DOCKER_PLATFORMS}"
 # This builds a multi-architecture image and uploads it, all in a
 # single step. The cached layers from the build step will be reused,
 # so ultimately this only assembles and pushes the manifest
-push_container "${tag}" "${platform}" PUSH_REGISTRY
+push_container "${tag}" "${platform}" BUILDER_BUILDX PUSH_REGISTRY

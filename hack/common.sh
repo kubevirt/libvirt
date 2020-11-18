@@ -32,19 +32,33 @@ prepare_dockerfile() {
 build_container() {
     local tag="$1"
     local platform="$2"
-    local push="$3"
+    local builder="$3"
+    local push="$4"
 
-    docker buildx build \
-           --progress=plain \
-           --platform="${platform}" \
-           --tag "${tag}" \
-           .
+    case "${builder}" in
+    BUILDER_BUILDX)
+        docker buildx build \
+               --progress=plain \
+               --platform="${platform}" \
+               --tag "${tag}" \
+               .
+        ;;
+    BUILDER_BUILD)
+        docker build \
+               --tag "${tag}" \
+               .
+        ;;
+    *)
+        die "build_container: Invalid argument"
+        ;;
+    esac
 }
 
 push_container() {
     local tag="$1"
     local platform="$2"
-    local push="$3"
+    local builder="$3"
+    local push="$4"
 
     case "${push}" in
     PUSH_DOCKER)
@@ -58,18 +72,31 @@ push_container() {
         ;;
     esac
 
-    docker buildx build \
-           --progress=plain \
-           "${push_arg}" \
-           --platform="${platform}" \
-           --tag "${tag}" \
-           .
+    case "${builder}" in
+    BUILDER_BUILDX)
+        docker buildx build \
+               --progress=plain \
+               "${push_arg}" \
+               --platform="${platform}" \
+               --tag "${tag}" \
+               .
+        ;;
+    BUILDER_BUILD)
+        docker build \
+               --tag "${tag}" \
+               .
+        if test "${push}" = PUSH_REGISTRY; then
+            docker push "${tag}"
+        fi
+        ;;
+    esac
 }
 
 delete_container() {
     local tag="$1"
     local platform="$2"
-    local push="$3"
+    local builder="$3"
+    local push="$4"
 
     case "${push}" in
     PUSH_DOCKER)
@@ -85,7 +112,8 @@ delete_container() {
 test_container() {
     local tag="$1"
     local platform="$2"
-    local push="$3"
+    local builder="$3"
+    local push="$4"
 
     docker run \
            --rm \
@@ -119,9 +147,9 @@ build_and_test_containers() {
         tag="${IMAGE_NAME}:${IMAGE_TAG}.${arch}"
         platform="linux/${arch}"
 
-        build_container "${tag}" "${platform}" PUSH_DOCKER
-        push_container "${tag}" "${platform}" PUSH_DOCKER
-        test_container "${tag}" "${platform}" PUSH_DOCKER
-        delete_container "${tag}" "${platform}" PUSH_DOCKER
+        build_container "${tag}" "${platform}" BUILDER_BUILDX PUSH_DOCKER
+        push_container "${tag}" "${platform}" BUILDER_BUILDX PUSH_DOCKER
+        test_container "${tag}" "${platform}" BUILDER_BUILDX PUSH_DOCKER
+        delete_container "${tag}" "${platform}" BUILDER_BUILDX PUSH_DOCKER
     done
 }
