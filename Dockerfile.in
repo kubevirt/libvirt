@@ -5,11 +5,14 @@ LABEL maintainer="The KubeVirt Project <kubevirt-dev@googlegroups.com>"
 RUN dnf install -y dnf-plugins-core && \
     dnf copr enable -y @kubevirt/libvirt-@LIBVIRT_VERSION@ && \
     dnf copr enable -y @kubevirt/qemu-@QEMU_VERSION@ && \
+    dnf copr enable -y @kubevirt/seabios-@SEABIOS_VERSION@ && \
     dnf install -y \
         libvirt-daemon-driver-qemu-@LIBVIRT_VERSION@.fc@FEDORA_VERSION@ \
         libvirt-client-@LIBVIRT_VERSION@.fc@FEDORA_VERSION@ \
         libvirt-daemon-driver-storage-core-@LIBVIRT_VERSION@.fc@FEDORA_VERSION@ \
         qemu-kvm-@QEMU_VERSION@.fc@FEDORA_VERSION@ \
+        seabios-bin-@SEABIOS_VERSION@.fc@FEDORA_VERSION@ \
+        seavgabios-bin-@SEABIOS_VERSION@.fc@FEDORA_VERSION@ \
         genisoimage \
         selinux-policy selinux-policy-targeted \
         nftables \
