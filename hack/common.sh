@@ -154,7 +154,19 @@ test_container() {
            --rm \
            --platform="${platform}" \
            "${tag}" \
-           sh -c 'for qemu in /usr/bin/qemu-system-*; do $qemu --version; done'
+           sh -c '
+               set -e; \
+               for qemu in \
+                   /usr/bin/qemu-system-aarch64 \
+                   /usr/bin/qemu-system-ppc64 \
+                   /usr/bin/qemu-system-s390x \
+                   /usr/bin/qemu-system-x86_64 \
+                   /usr/libexec/qemu-kvm; \
+               do \
+                   test -f "$qemu" || continue; \
+                   "$qemu" --version && break; \
+               done
+           '
 }
 
 build_and_test_containers() {
