@@ -19,15 +19,38 @@ die() {
     exit 1
 }
 
+_make_binary_version() {
+    local package_version="$1"
+    local os_version="$2"
+
+    # Strip the .fc* or .el* suffix, if present
+    package_version="${package_version%.fc*}"
+    package_version="${package_version%.el*}"
+
+    echo "${package_version}.fc${os_version}"
+}
+
 prepare_dockerfile() {
+    # Source and binary versions might differ, because we might for
+    # example rebuild a SRPM coming from Fedora 34 on Fedora 32
+    LIBVIRT_SOURCE_VERSION="${LIBVIRT_VERSION}"
+    QEMU_SOURCE_VERSION="${QEMU_VERSION}"
+    SEABIOS_SOURCE_VERSION="${SEABIOS_VERSION}"
+    LIBVIRT_BINARY_VERSION="$(_make_binary_version "${LIBVIRT_VERSION}" "${FEDORA_VERSION}")"
+    QEMU_BINARY_VERSION="$(_make_binary_version "${QEMU_VERSION}" "${FEDORA_VERSION}")"
+    SEABIOS_BINARY_VERSION="$(_make_binary_version "${SEABIOS_VERSION}" "${FEDORA_VERSION}")"
+
     # We need to do this instead of using the ARG feature because buildx
     # doesn't currently behave correctly when cross-building containers
     # that use that feature: preprocessing the file ourselves works
     # around that limitation
     sed -e "s/@FEDORA_VERSION@/${FEDORA_VERSION}/g" \
-        -e "s/@LIBVIRT_VERSION@/${LIBVIRT_VERSION}/g" \
-        -e "s/@QEMU_VERSION@/${QEMU_VERSION}/g" \
-        -e "s/@SEABIOS_VERSION@/${SEABIOS_VERSION}/g" \
+        -e "s/@LIBVIRT_SOURCE_VERSION@/${LIBVIRT_SOURCE_VERSION}/g" \
+        -e "s/@LIBVIRT_BINARY_VERSION@/${LIBVIRT_BINARY_VERSION}/g" \
+        -e "s/@QEMU_SOURCE_VERSION@/${QEMU_SOURCE_VERSION}/g" \
+        -e "s/@QEMU_BINARY_VERSION@/${QEMU_BINARY_VERSION}/g" \
+        -e "s/@SEABIOS_SOURCE_VERSION@/${SEABIOS_SOURCE_VERSION}/g" \
+        -e "s/@SEABIOS_BINARY_VERSION@/${SEABIOS_BINARY_VERSION}/g" \
         <Dockerfile.in >Dockerfile
 }
 
