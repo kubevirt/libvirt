@@ -28,9 +28,6 @@ RUN dnf install -y dnf-plugins-core && \
         # Allow qemu to bind to privileged ports \
         # From: https://github.com/kubevirt/kubevirt/pull/1138 \
         setcap CAP_NET_BIND_SERVICE=+eip "$qemu" && \
-        # Needed for migration from old KubeVirt versions \
-        # https://github.com/kubevirt/kubevirt/issues/4629 \
-        ln -s "$qemu" /usr/libexec/qemu-kvm && \
         break; \
     done
 
