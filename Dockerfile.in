@@ -4,7 +4,7 @@ LABEL maintainer="The KubeVirt Project <kubevirt-dev@googlegroups.com>"
 
 RUN dnf install -y dnf-plugins-core && \
     dnf copr enable -y @kubevirt/libvirt-@LIBVIRT_SOURCE_VERSION@ && \
-    dnf copr enable -y @kubevirt/qemu-kvm-@QEMU_SOURCE_VERSION@ && \
+    dnf copr enable -y @kubevirt/@QEMU_PACKAGE_NAME@-@QEMU_SOURCE_VERSION@ && \
     dnf copr enable -y @kubevirt/seabios-@SEABIOS_SOURCE_VERSION@ && \
     dnf install -y \
         libvirt-daemon-driver-qemu-@LIBVIRT_BINARY_VERSION@ \
