@@ -1,3 +1,11 @@
+# DEPRECATED
+
+With the merge of https://github.com/kubevirt/kubevirt/pull/4703 this
+repository is no longer needed in `kubevirt/kubevirt`.
+
+The repository may get some sporadic fixes for kubevirt/kubevirt releses prior
+to `v0.37.0` until they are EOL.
+
 # Containerized libvirtd and QEMU
 
 This is a simple container wrapping libvirtd.
