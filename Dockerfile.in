@@ -13,7 +13,7 @@ RUN dnf install -y dnf-plugins-core && \
         qemu-kvm-@QEMU_BINARY_VERSION@ \
         seabios-bin-@SEABIOS_BINARY_VERSION@ \
         seavgabios-bin-@SEABIOS_BINARY_VERSION@ \
-        genisoimage \
+        xorriso \
         selinux-policy selinux-policy-targeted \
         nftables \
         iptables \
